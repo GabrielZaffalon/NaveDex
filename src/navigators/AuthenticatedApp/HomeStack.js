@@ -6,7 +6,7 @@ import { Home, CreateNaver } from 'src/screens'
 const Stack = createStackNavigator()
 
 const HomeSack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name='Home' component={Home} />
     <Stack.Screen name='CreateNaver' component={CreateNaver} />
   </Stack.Navigator>

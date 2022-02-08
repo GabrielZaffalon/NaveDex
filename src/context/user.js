@@ -10,14 +10,11 @@ const UserContext = React.createContext()
 const UserProvider = props => {
   const queryClient = useQueryClient()
 
-  const [user, setUser] = useState(true)
+  const [user, setUser] = useState(false)
 
-  const { mutate: login } = useMutation(loginService, {
-    onSuccess: async ({ token, ...user }) => {
-      await setToken(token)
-      // queryClient.setQueryData('user', user)
-    }
-  })
+  const login = credentials => {
+    setUser(true)
+  }
 
   const logout = () => {
     clearToken()

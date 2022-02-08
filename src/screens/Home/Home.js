@@ -1,16 +1,17 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import { Text } from 'src/components'
 import { TouchableOpacity } from 'react-native'
-import { width } from 'styled-system'
 
 const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+      <Text fontFamily='MontserratThin-MVY6x' color='#000' fontSize='48px'>
+        Front-end Developer
+      </Text>
       <TouchableOpacity
-        style={{ width: 200, height: 25, backgroundColor: '#f21', alignItems: 'center' }}
+        style={{ width: 200, height: 25, alignItems: 'center' }}
         onPress={() => {
-          console.log('oi')
           navigation.navigate('CreateNaver')
         }}
       >
