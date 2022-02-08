@@ -13,7 +13,6 @@ const UserProvider = props => {
   const [user, setUser] = useState(false)
 
   const login = credentials => {
-    // console.log(credentials)
     setUser(true)
   }
 

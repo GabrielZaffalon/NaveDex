@@ -2,7 +2,6 @@ import React from 'react'
 import { View } from 'react-native'
 import { Text } from 'src/components'
 import { TouchableOpacity } from 'react-native'
-import { width } from 'styled-system'
 
 const Home = ({ navigation }) => {
   return (
