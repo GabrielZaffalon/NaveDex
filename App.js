@@ -13,6 +13,7 @@ const queryClient = new QueryClient()
 
 const App = () => {
   const { user } = useUser()
+  console.log({ user })
   return (
     <ThemeProvider theme={theme}>
       <StatusBar barStyle='dark-content' />
