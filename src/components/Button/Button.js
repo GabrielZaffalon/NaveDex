@@ -12,7 +12,6 @@ const ButtonComponent = ({ text, ...props }) => (
 
 const Button = styled.TouchableOpacity`
   padding: 10px;
-  border-radius: 4px;
   background-color: white;
   align-items: center;
   ${space}

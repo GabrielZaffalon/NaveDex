@@ -6958,7 +6958,7 @@ react-native-screens@^2.18.1:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
 
-react-native@0.67.2:
+react-native@^0.67.2:
   version "0.67.2"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.67.2.tgz#312224bc2271c3cecd374d4bc425619cff4ea5dc"
   integrity sha512-grEtpOLLvtSg8Bivg0ffVRCjTkresqMt7Jdog/geF6VAYhb4RnLaaUCWvyrfyB9buf135FKnqg5BIuve/XQNXA==
