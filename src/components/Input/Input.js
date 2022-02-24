@@ -8,7 +8,6 @@ const InputComponent = styled.TextInput.attrs(props => ({
   border: 1px solid black;
   color: black;
   padding: 4px 8px;
-  border-radius: 4px;
   ${space}
   ${layout}
   ${typography}
