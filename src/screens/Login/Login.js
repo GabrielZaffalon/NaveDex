@@ -14,9 +14,13 @@ const Login = () => {
       <Text>Login screen</Text>
       <Input my={10} value={username} onChangeText={setUsername} />
       <Input my={10} value={password} onChangeText={setPassword} secureTextEntry />
-      <Button text='entrar' onPress={() => login({ username, password })} />
+      <Button
+        text='Entrar'
+        onPress={() => login({ username, password })}
+        variant='primary'
+        icon={{ name: 'trash' }}
+      />
     </Column>
   )
 }
-
 export default Login
