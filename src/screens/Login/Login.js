@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Column, Input, Button, Text } from 'src/components'
+import { Column, Input, Button, Text, Naver } from 'src/components'
 import { useUser } from 'src/context'
 
 const Login = () => {
@@ -14,6 +14,7 @@ const Login = () => {
       <Text>Login screen</Text>
       <Input my={10} value={username} onChangeText={setUsername} />
       <Input my={10} value={password} onChangeText={setPassword} secureTextEntry />
+      {/* <Naver title='oi' description='tchau' /> */}
       <Button
         text='Entrar'
         onPress={() => login({ username, password })}
