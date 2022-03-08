@@ -20,7 +20,6 @@ const Input = ({
   maxLength,
   value,
   autoCapitalize,
-  action,
   secureTextEntry,
   ...props
 }) => {
@@ -29,7 +28,7 @@ const Input = ({
   return (
     <Column {...props}>
       {label && (
-        <Text color='#000' variant='small' mb={1} fontFamily='MontserratBold'>
+        <Text color={theme.colors.black} variant='small' mb={1} fontFamily='MontserratBold'>
           {label}
         </Text>
       )}
@@ -71,24 +70,20 @@ const Input = ({
 }
 
 const Container = styled.View`
-  ${({ theme: { colors }, error, editable, multiline }) => {
-    return `
-      border-color: ${theme.colors.borderDark};
-      align-items: center;
-      height: 40px;
-      flex-direction: row;
-      border: 1px solid;
-      background-color: transparent;
-      margin-bottom: 32px
-    `
-  }}
+  border-color: ${theme.colors.borderDark};
+  align-items: center;
+  height: 40px;
+  flex-direction: row;
+  border: 1px solid;
+  background-color: transparent;
+  margin-bottom: 32px;
 `
 
-const InputComponent = styled.TextInput.attrs(({ theme, editable, multiline, ...props }) => ({
+const InputComponent = styled.TextInput.attrs(({ multiline, ...props }) => ({
   autoCapitalize: 'none',
   placeholderTextColor: theme.colors.gray,
   textAlignVertical: multiline && Platform.OS === 'android' && 'top',
-  color: '#000',
+  color: theme.colors.black,
   fontFamily: 'MontserratMedium',
   ...props
 }))`
