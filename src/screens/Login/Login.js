@@ -11,9 +11,15 @@ const Login = () => {
 
   return (
     <Column flex={1} justifyContent='center' p={40}>
-      <Text>Login screen</Text>
-      <Input my={10} value={username} onChangeText={setUsername} />
-      <Input my={10} value={password} onChangeText={setPassword} secureTextEntry />
+      <Input my={10} value={username} onChange={setUsername} label='E-mail' placeholder='E-mail' />
+      <Input
+        my={10}
+        value={password}
+        onChange={setPassword}
+        secureTextEntry
+        label='Senha'
+        placeholder='Senha'
+      />
       <Button
         text='Entrar'
         onPress={() => login({ username, password })}

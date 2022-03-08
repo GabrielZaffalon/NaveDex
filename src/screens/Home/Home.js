@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native'
 const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text fontFamily='MontserratThin-MVY6x' color='#000' fontSize='48px'>
+      <Text fontFamily='MontserratThin' color='#000' fontSize='48px'>
         Front-end Developer
       </Text>
       <TouchableOpacity
