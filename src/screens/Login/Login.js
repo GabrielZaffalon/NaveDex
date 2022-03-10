@@ -14,7 +14,6 @@ const Login = () => {
       <Text>Login screen</Text>
       <Input my={10} value={username} onChangeText={setUsername} />
       <Input my={10} value={password} onChangeText={setPassword} secureTextEntry />
-      {/* <Naver title='oi' description='tchau' /> */}
       <Button
         text='Entrar'
         onPress={() => login({ username, password })}

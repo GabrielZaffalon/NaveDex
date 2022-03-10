@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components/native'
 import { Image, TouchableOpacity } from 'react-native'
 
 import { Text } from '../Text'
@@ -8,23 +7,28 @@ import { Row } from '../Row'
 import { Column } from '../Column'
 import theme from '../../theme'
 
-const Naver = ({ href, title, description, onEdit, onDelete, ...props }) => {
+const Naver = ({ uri, title, description, onEdit, onDelete, imageSize, ...props }) => {
   return (
     <Column {...props}>
       <Image
-        style={{ width: 200, height: 200 }}
+        style={{ width: imageSize, height: imageSize }}
         source={{
-          uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2EfHtzauHcM%2Fmaxresdefault.jpg'
+          uri
         }}
         resizeMode='cover'
       />
-      <Text>{title}</Text>
-      <Text>{description}</Text>
-      <Row>
-        <TouchableOpacity>
-          <Icons icon='trash' />
+      <Text fontFamily='MontserratBold' marginTop={'8px'} color={theme.colors.black}>
+        {title}
+      </Text>
+      <Text fontFamily='MontserratLight' marginTop={'4px'} color={theme.colors.black}>
+        {description}
+      </Text>
+
+      <Row marginTop={'8px'}>
+        <TouchableOpacity onPress={onDelete}>
+          <Icons icon='trash' marginRight={16} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onEdit}>
           <Icons icon='edit' />
         </TouchableOpacity>
       </Row>
