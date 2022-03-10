@@ -5,18 +5,13 @@ import { Text } from '../Text'
 import { Icons } from '../Icons'
 import { Row } from '../Row'
 import { Column } from '../Column'
-import theme from '../../theme'
+
+import theme from 'src/theme'
 
 const Naver = ({ uri, title, description, onEdit, onDelete, imageSize, ...props }) => {
   return (
     <Column {...props}>
-      <Image
-        style={{ width: imageSize, height: imageSize }}
-        source={{
-          uri
-        }}
-        resizeMode='cover'
-      />
+      <Image style={{ width: imageSize, height: imageSize }} source={{ uri }} resizeMode='cover' />
       <Text fontFamily='MontserratBold' marginTop={'8px'} color={theme.colors.black}>
         {title}
       </Text>

@@ -54,8 +54,9 @@ const Home = ({ navigation }) => {
       </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Row flexWrap='wrap' px='16px' justifyContent='space-between'>
-          {NAVERS.map(naver => (
+          {NAVERS.map((naver, index) => (
             <Naver
+              key={`${naver.title}-${index}`}
               title={naver.title}
               description={naver.description}
               uri={naver.uri}
