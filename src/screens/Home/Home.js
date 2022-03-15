@@ -1,7 +1,6 @@
-import React from 'react'
-import { View, ScrollView } from 'react-native'
-import { Text, Naver, Row } from 'src/components'
-import { TouchableOpacity, Dimensions } from 'react-native'
+import React, { useState } from 'react'
+import { View, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
+import { Text, Naver, Row, Modal } from 'src/components'
 
 const NAVERS = [
   {
@@ -39,8 +38,35 @@ const NAVERS = [
 const Home = ({ navigation }) => {
   const screenWidth = Dimensions.get('screen').width
 
+  const [isConfirmingDeletion, setIsConfirmingDeletion] = useState(false)
+  const [hasSuccessfullyDeleted, setHasSuccessfullyDeleted] = useState(false)
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Modal
+        visible={isConfirmingDeletion}
+        handleClose={() => setIsConfirmingDeletion(false)}
+        title='Excluir naver'
+        description='Tem certeza que deseja excluir este naver?'
+        buttons={{
+          btn1: { onPress: () => setIsConfirmingDeletion(false), title: 'Cancelar' },
+          btn2: {
+            onPress: () => {
+              setIsConfirmingDeletion(false)
+              setHasSuccessfullyDeleted(true)
+            },
+            title: 'Excluir'
+          }
+        }}
+      />
+
+      <Modal
+        visible={hasSuccessfullyDeleted}
+        handleClose={() => setHasSuccessfullyDeleted(false)}
+        title='Naver excluído'
+        description='Naver excluído com sucesso'
+      />
+
       <Text fontFamily='MontserratThin' color='#000' fontSize='48px'>
         Front-end Developer
       </Text>
@@ -62,7 +88,9 @@ const Home = ({ navigation }) => {
               uri={naver.uri}
               imageSize={(screenWidth - 48) / 2}
               my={13}
-              onDelete={() => {}}
+              onDelete={() => {
+                setIsConfirmingDeletion(true)
+              }}
               onEdit={() => {}}
             />
           ))}
