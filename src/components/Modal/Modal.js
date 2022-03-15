@@ -1,20 +1,11 @@
-import React, { useState } from 'react'
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Pressable,
-  View,
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native'
+import React from 'react'
+import { Modal, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 
 import { Text } from '../Text'
 import { Icons } from '../Icons'
 import { Row } from '../Row'
 import { Column } from '../Column'
 import { Button } from '../Button'
-import { justifyContent } from 'styled-system'
 
 const ModalComponent = ({ visible, handleClose, buttons = {}, title, description, ...props }) => {
   return (
