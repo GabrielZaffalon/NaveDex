@@ -1,4 +1,4 @@
-import { flexbox, space, layout, color } from 'styled-system'
+import { flexbox, space, layout, color, shadow } from 'styled-system'
 import styled from 'styled-components'
 
 const ColumnComponent = styled.View`
@@ -6,6 +6,7 @@ const ColumnComponent = styled.View`
   ${space}
   ${layout}
   ${color}
+  ${shadow}
 `
 
 export default ColumnComponent

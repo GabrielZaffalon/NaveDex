@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
-import { Text, Naver, Row, Modal } from 'src/components'
+import { Text, Naver, Row, Modal, Header } from 'src/components'
 
 const NAVERS = [
   {
@@ -43,6 +43,38 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Header navigation={navigation} />
+
+      {/* <Text fontFamily='MontserratThin' color='#000' fontSize='48px'>
+        Front-end Developer
+      </Text>
+      <TouchableOpacity
+        style={{ width: 200, height: 25, alignItems: 'center' }}
+        onPress={() => {
+          navigation.navigate('CreateNaver')
+        }}
+      >
+        <Text>Create Naver User</Text>
+      </TouchableOpacity> */}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Row flexWrap='wrap' px='16px' justifyContent='space-between'>
+          {NAVERS.map((naver, index) => (
+            <Naver
+              key={`${naver.title}-${index}`}
+              title={naver.title}
+              description={naver.description}
+              uri={naver.uri}
+              imageSize={(screenWidth - 48) / 2}
+              my={13}
+              onDelete={() => {
+                setIsConfirmingDeletion(true)
+              }}
+              onEdit={() => {}}
+            />
+          ))}
+        </Row>
+      </ScrollView>
+
       <Modal
         visible={isConfirmingDeletion}
         handleClose={() => setIsConfirmingDeletion(false)}
@@ -66,36 +98,6 @@ const Home = ({ navigation }) => {
         title='Naver excluído'
         description='Naver excluído com sucesso'
       />
-
-      <Text fontFamily='MontserratThin' color='#000' fontSize='48px'>
-        Front-end Developer
-      </Text>
-      <TouchableOpacity
-        style={{ width: 200, height: 25, alignItems: 'center' }}
-        onPress={() => {
-          navigation.navigate('CreateNaver')
-        }}
-      >
-        <Text>Create Naver User</Text>
-      </TouchableOpacity>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Row flexWrap='wrap' px='16px' justifyContent='space-between'>
-          {NAVERS.map((naver, index) => (
-            <Naver
-              key={`${naver.title}-${index}`}
-              title={naver.title}
-              description={naver.description}
-              uri={naver.uri}
-              imageSize={(screenWidth - 48) / 2}
-              my={13}
-              onDelete={() => {
-                setIsConfirmingDeletion(true)
-              }}
-              onEdit={() => {}}
-            />
-          ))}
-        </Row>
-      </ScrollView>
     </View>
   )
 }

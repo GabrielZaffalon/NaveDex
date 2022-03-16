@@ -9,7 +9,7 @@ import { Button } from '../Button'
 
 const ModalComponent = ({ visible, handleClose, buttons = {}, title, description, ...props }) => {
   return (
-    <Modal visible={visible} transparent>
+    <Modal visible={visible} transparent animationType='fade'>
       <TouchableWithoutFeedback onPress={handleClose}>
         <Column
           flex={1}
