@@ -28,13 +28,21 @@ const Input = ({
   return (
     <Column {...props}>
       {label && (
-        <Text color={theme.colors.black} variant='small' mb={1} fontFamily='MontserratBold'>
+        <Text
+          color={theme.colors.black}
+          variant='small'
+          mb={1}
+          fontFamily='MontserratBold'
+          fontWeight='600px'
+          fontSize={14}
+        >
           {label}
         </Text>
       )}
       <Container error={!!error} isFocused={isFocused} editable={!disabled} multiline={textArea}>
         <InputComponent
           placeholder={placeholder}
+          fontSize={16}
           secureTextEntry={type === 'password'}
           editable={!disabled}
           onChangeText={text => {

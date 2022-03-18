@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Column, Input, Button, Text, Naver } from 'src/components'
+import { Column, Input, Button, Row, Icons } from 'src/components'
 import { useUser } from 'src/context'
 
 const Login = () => {
@@ -10,22 +10,27 @@ const Login = () => {
   const [password, setPassword] = useState('')
 
   return (
-    <Column flex={1} justifyContent='center' p={40}>
-      <Input my={10} value={username} onChange={setUsername} label='E-mail' placeholder='E-mail' />
-      <Input
-        my={10}
-        value={password}
-        onChange={setPassword}
-        secureTextEntry
-        label='Senha'
-        placeholder='Senha'
-      />
-      <Button
-        text='Entrar'
-        onPress={() => login({ username, password })}
-        variant='primary'
-        icon={{ name: 'trash' }}
-      />
+    <Column flex={1} justifyContent='center' justifyContent='space-evenly' p={40}>
+      <Row width='100%' justifyContent='center'>
+        <Icons icon='logo' />
+      </Row>
+      <Column py={32}>
+        <Input value={username} onChange={setUsername} label='E-mail' placeholder='E-mail' />
+        <Input
+          value={password}
+          onChange={setPassword}
+          secureTextEntry
+          label='Senha'
+          placeholder='Senha'
+        />
+        <Button
+          text='Entrar'
+          onPress={() => login({ username, password })}
+          variant='primary'
+          height={42}
+          my='8px'
+        />
+      </Column>
     </Column>
   )
 }
