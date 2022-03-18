@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import { Column, Input, Button, Row, Icons } from 'src/components'
 import { useUser } from 'src/context'
-// import { Icons } from '../../components/Icons'
 
 const Login = () => {
   const { login } = useUser()
