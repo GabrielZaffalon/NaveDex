@@ -48,6 +48,7 @@ const ButtonComponent = ({
         <Text
           color={variant === 'primary' ? 'white' : 'dark'}
           variant='body-16-medium'
+          fontFamily='MontserratSemiBold'
           {...textProps}
         >
           {text}
