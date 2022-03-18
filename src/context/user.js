@@ -18,6 +18,7 @@ const UserProvider = props => {
 
   const logout = () => {
     clearToken()
+    setUser(null)
     // queryClient.setQueryData('user', null)
   }
 

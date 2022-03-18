@@ -3,12 +3,16 @@ import { TouchableOpacity } from 'react-native'
 
 import { DrawerActions } from '@react-navigation/native'
 
+import { useUser } from 'src/context'
+
 import { Text } from '../Text'
 import { Column } from '../Column'
 import { Icons } from '../Icons'
 import { Row } from '../Row'
 
 const DrawerContent = ({ navigation }) => {
+  const { logout } = useUser()
+
   return (
     <Column bg='white' flex={1}>
       <Row py={20} px={16}>
@@ -22,7 +26,7 @@ const DrawerContent = ({ navigation }) => {
             Navers
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity onPress={logout}>
           <Text fontFamily='MontserratSemiBold' marginTop={24} color='black' fontSize='22px'>
             Sair
           </Text>
