@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
 import { Text, Naver, Row, Modal, Header } from 'src/components'
+import { Button } from '../../components'
 
 const NAVERS = [
   {
@@ -22,16 +23,6 @@ const NAVERS = [
     title: 'oi',
     description: 'tchau',
     uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2EfHtzauHcM%2Fmaxresdefault.jpg'
-  },
-  {
-    title: 'oi',
-    description: 'tchau',
-    uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmundoaparte.com.br%2Fwp-content%2Fuploads%2F2017%2F09%2Fgolden-retriever-2419453_960_720.jpg'
-  },
-  {
-    title: 'oi',
-    description: 'tchau',
-    uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fstatic.poder360.com.br%2F2021%2F07%2Ffaustao.png'
   }
 ]
 
@@ -45,17 +36,19 @@ const Home = ({ navigation }) => {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Header navigation={navigation} />
 
-      {/* <Text fontFamily='MontserratThin' color='#000' fontSize='48px'>
-        Front-end Developer
-      </Text>
-      <TouchableOpacity
-        style={{ width: 200, height: 25, alignItems: 'center' }}
-        onPress={() => {
-          navigation.navigate('CreateNaver')
-        }}
-      >
-        <Text>Create Naver User</Text>
-      </TouchableOpacity> */}
+      <Row flex={1} alignItems='center' justifyContent='space-between' width='100%' p={16}>
+        <Text fontFamily='MontserratSemiBold' fontSize={22} color='black'>
+          Navers
+        </Text>
+        <Button
+          text='Adicionar naver'
+          onPress={() => {}}
+          variant='primary'
+          width='170px'
+          height={40}
+        />
+      </Row>
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <Row flexWrap='wrap' px='16px' justifyContent='space-between'>
           {NAVERS.map((naver, index) => (
