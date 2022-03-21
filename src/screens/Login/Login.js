@@ -12,7 +12,7 @@ const Login = () => {
   return (
     <Column flex={1} justifyContent='center' justifyContent='space-evenly' p={40}>
       <Row width='100%' justifyContent='center'>
-        <Icons icon='logo' />
+        <Icons icon='logo' height='40px' width='156px' />
       </Row>
       <Column py={32}>
         <Input value={username} onChange={setUsername} label='E-mail' placeholder='E-mail' />
