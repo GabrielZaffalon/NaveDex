@@ -1,28 +1,49 @@
 import React, { useState } from 'react'
 import { View, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
+
 import { Text, Naver, Row, Modal, Header } from 'src/components'
 import { Button } from '../../components'
 
 const NAVERS = [
   {
-    title: 'oi',
-    description: 'tchau',
-    uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2EfHtzauHcM%2Fmaxresdefault.jpg'
+    id: '1',
+    name: 'Pequeno golden',
+    admission_date: '2020-04-22T00:00:00.000Z',
+    job_role: 'Um golden filhote',
+    user_id: '1',
+    project: 'Nasceu de um golden',
+    birthdate: '2 meses',
+    url: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2EfHtzauHcM%2Fmaxresdefault.jpg'
   },
   {
-    title: 'oi',
-    description: 'tchau',
-    uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmundoaparte.com.br%2Fwp-content%2Fuploads%2F2017%2F09%2Fgolden-retriever-2419453_960_720.jpg'
+    id: '2',
+    name: 'Grande golden',
+    admission_date: '2020-04-22T00:00:00.000Z',
+    job_role: 'Um golden adulto',
+    user_id: '2',
+    project: 'Late',
+    birthdate: '2 anos',
+    url: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmundoaparte.com.br%2Fwp-content%2Fuploads%2F2017%2F09%2Fgolden-retriever-2419453_960_720.jpg'
   },
   {
-    title: 'oi',
-    description: 'tchau',
-    uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fstatic.poder360.com.br%2F2021%2F07%2Ffaustao.png'
+    id: '3',
+    name: 'Faustão',
+    admission_date: '2020-04-22T00:00:00.000Z',
+    job_role: 'É o Faustão',
+    user_id: '3',
+    project: 'Foi pra Band',
+    birthdate: '71 anos',
+    url: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fstatic.poder360.com.br%2F2021%2F07%2Ffaustao.png'
   },
   {
-    title: 'oi',
-    description: 'tchau',
-    uri: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2EfHtzauHcM%2Fmaxresdefault.jpg'
+    id: '4',
+    name: 'Golden pequeno',
+    admission_date: '2020-04-22T00:00:00.000Z',
+    job_role: 'É o mesmo mas diferente',
+    user_id: '4',
+    project: 'Nasceu de outro golden',
+    birthdate: '2/5 meses',
+    url: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.ytimg.com%2Fvi%2F2EfHtzauHcM%2Fmaxresdefault.jpg'
   }
 ]
 
@@ -46,6 +67,7 @@ const Home = ({ navigation }) => {
           variant='primary'
           width='170px'
           height={40}
+          onPress={() => navigation.navigate('CreateNaver')}
         />
       </Row>
 
@@ -53,16 +75,18 @@ const Home = ({ navigation }) => {
         <Row flexWrap='wrap' px='16px' justifyContent='space-between'>
           {NAVERS.map((naver, index) => (
             <Naver
-              key={`${naver.title}-${index}`}
-              title={naver.title}
-              description={naver.description}
-              uri={naver.uri}
+              key={`${naver.name}-${index}`}
+              title={naver.name}
+              description={naver.job_role}
+              uri={naver.url}
               imageSize={(screenWidth - 48) / 2}
               my={13}
               onDelete={() => {
                 setIsConfirmingDeletion(true)
               }}
-              onEdit={() => {}}
+              onEdit={() => {
+                navigation.navigate('CreateNaver', { naver })
+              }}
             />
           ))}
         </Row>
