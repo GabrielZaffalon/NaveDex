@@ -19,7 +19,13 @@ const Header = ({ backHeader = false }) => {
       alignItems='center'
     >
       {backHeader ? (
-        <Icons icon='back' />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Home')
+          }}
+        >
+          <Icons icon='back' />
+        </TouchableOpacity>
       ) : (
         <TouchableOpacity
           onPress={() => {

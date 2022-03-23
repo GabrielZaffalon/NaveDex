@@ -66,6 +66,7 @@ const Home = ({ navigation }) => {
           variant='primary'
           width='170px'
           height={40}
+          onPress={() => navigation.navigate('CreateNaver')}
         />
       </Row>
 
@@ -83,7 +84,9 @@ const Home = ({ navigation }) => {
               onDelete={() => {
                 setIsConfirmingDeletion(true)
               }}
-              onEdit={() => {}}
+              onEdit={() => {
+                navigation.navigate('CreateNaver', { naver })
+              }}
             />
           ))}
         </Row>
