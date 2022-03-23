@@ -5,11 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Button, Column, Header, Input, Row, Text } from '../../components'
 
 const CreateNaver = ({ route }) => {
-  // const { naver } = route.params
-  // console.log(naver)
-
   const [editNaver, setEditNaver] = useState(route.params?.naver)
-  // console.log(editNaver)
   const navigation = useNavigation()
 
   return (
