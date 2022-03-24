@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { View, ScrollView } from 'react-native'
 
-import { Button, Column, Header, Input, Text } from 'src/components'
+import { Button, Column, Header, Input, Text, Modal } from 'src/components'
 
 const CreateNaver = ({ route, navigation }) => {
   const [editNaver, setEditNaver] = useState(route.params?.naver)
+
+  const [message, setMessage] = useState(false)
 
   return (
     <View alignItems='center' justifyContent='center'>
@@ -57,11 +59,18 @@ const CreateNaver = ({ route, navigation }) => {
             height={42}
             my='8px'
             onPress={() => {
-              navigation.navigate('Home')
+              setMessage(true)
             }}
           />
         </Column>
       </ScrollView>
+
+      <Modal
+        visible={message}
+        handleClose={() => setMessage(false)}
+        title={`Naver ${!!route.params?.naver?.name ? 'editado' : 'criado'}`}
+        description={` Naver ${!!route.params?.naver?.name ? 'editado' : 'criado'} com sucesso!`}
+      />
     </View>
   )
 }
