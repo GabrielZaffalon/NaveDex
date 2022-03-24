@@ -21,7 +21,7 @@ const Header = ({ backHeader = false }) => {
       {backHeader ? (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Home')
+            navigation.goBack()
           }}
         >
           <Icons icon='back' />
