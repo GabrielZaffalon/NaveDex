@@ -21,7 +21,7 @@ const DrawerContent = ({ navigation }) => {
         </TouchableOpacity>
       </Row>
       <Column width='100%' alignItems='center' justifyContent='center' flex={1}>
-        <TouchableOpacity onPress={() => navigation.navigate('CreateNaver')}>
+        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
           <Text fontFamily='MontserratSemiBold' color='black' fontSize='22px'>
             Navers
           </Text>
