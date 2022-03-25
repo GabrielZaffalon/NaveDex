@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { View, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
+import { View, ScrollView, Dimensions } from 'react-native'
 
-import { Text, Naver, Row, Modal, Header } from 'src/components'
-import { Button } from '../../components'
+import { Text, Naver, Row, Modal, Header, Button } from 'src/components'
 
 const NAVERS = [
   {
@@ -75,10 +74,8 @@ const Home = ({ navigation }) => {
         <Row flexWrap='wrap' px='16px' justifyContent='space-between'>
           {NAVERS.map((naver, index) => (
             <Naver
-              key={`${naver.name}-${index}`}
-              title={naver.name}
-              description={naver.job_role}
-              uri={naver.url}
+              key={`${naver.title}-${index}`}
+              naver={naver}
               imageSize={(screenWidth - 48) / 2}
               my={13}
               onDelete={() => {

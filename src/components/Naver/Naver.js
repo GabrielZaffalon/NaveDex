@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { Text } from '../Text'
 import { Icons } from '../Icons'
@@ -8,15 +9,23 @@ import { Column } from '../Column'
 
 import theme from 'src/theme'
 
-const Naver = ({ uri, title, description, onEdit, onDelete, imageSize, ...props }) => {
+const Naver = ({ onEdit, onDelete, imageSize, naver, ...props }) => {
+  const navigation = useNavigation()
+
   return (
     <Column {...props}>
-      <Image style={{ width: imageSize, height: imageSize }} source={{ uri }} resizeMode='cover' />
+      <TouchableOpacity onPress={() => navigation.navigate('NaverProfile', { naver })}>
+        <Image
+          style={{ width: imageSize, height: imageSize }}
+          source={{ uri: naver.url }}
+          resizeMode='cover'
+        />
+      </TouchableOpacity>
       <Text fontFamily='MontserratBold' marginTop={'8px'} color={theme.colors.black}>
-        {title}
+        {naver.name}
       </Text>
       <Text fontFamily='MontserratLight' marginTop={'4px'} color={theme.colors.black}>
-        {description}
+        {naver.job_role}
       </Text>
 
       <Row marginTop={'8px'}>
