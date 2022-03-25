@@ -75,9 +75,6 @@ const Home = ({ navigation }) => {
           {NAVERS.map((naver, index) => (
             <Naver
               key={`${naver.title}-${index}`}
-              title={naver.name}
-              description={naver.job_role}
-              uri={naver.url}
               naver={naver}
               imageSize={(screenWidth - 48) / 2}
               my={13}
