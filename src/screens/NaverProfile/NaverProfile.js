@@ -55,7 +55,7 @@ const NaverProfile = ({ route }) => {
             text='Excluir'
             onPress={() => setIsConfirmingDeletion(true)}
             variant='secondary'
-            width='158px'
+            width={(width - 48) / 2}
             height={40}
             icon={{ name: 'trash' }}
             marginRight={16}
@@ -64,7 +64,7 @@ const NaverProfile = ({ route }) => {
             text='Editar'
             onPress={() => navigation.navigate('CreateNaver', { naver })}
             variant='primary'
-            width='158px'
+            width={(width - 48) / 2}
             height={40}
             icon={{ name: 'edit' }}
           />

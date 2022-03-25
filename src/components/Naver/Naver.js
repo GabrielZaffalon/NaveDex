@@ -9,7 +9,7 @@ import { Column } from '../Column'
 
 import theme from 'src/theme'
 
-const Naver = ({ uri, title, description, onEdit, onDelete, imageSize, naver, ...props }) => {
+const Naver = ({ onEdit, onDelete, imageSize, naver, ...props }) => {
   const navigation = useNavigation()
 
   return (
@@ -17,15 +17,15 @@ const Naver = ({ uri, title, description, onEdit, onDelete, imageSize, naver, ..
       <TouchableOpacity onPress={() => navigation.navigate('NaverProfile', { naver })}>
         <Image
           style={{ width: imageSize, height: imageSize }}
-          source={{ uri }}
+          source={{ uri: naver.url }}
           resizeMode='cover'
         />
       </TouchableOpacity>
       <Text fontFamily='MontserratBold' marginTop={'8px'} color={theme.colors.black}>
-        {title}
+        {naver.name}
       </Text>
       <Text fontFamily='MontserratLight' marginTop={'4px'} color={theme.colors.black}>
-        {description}
+        {naver.job_role}
       </Text>
 
       <Row marginTop={'8px'}>
