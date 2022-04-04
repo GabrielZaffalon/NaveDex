@@ -9,10 +9,15 @@ import { AppProviders, useUser } from 'src/context'
 import { Loader, Column } from 'src/components'
 import theme from 'src/theme'
 
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+}
+
 const queryClient = new QueryClient()
 
 const App = () => {
   const { user } = useUser()
+  // console.tron.log({ user })
   return (
     <ThemeProvider theme={theme}>
       <StatusBar barStyle='dark-content' />

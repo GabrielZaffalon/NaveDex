@@ -9,4 +9,4 @@ export const getMe = async () => {
   return api.get('/me')
 }
 
-export const login = credentials => api.post('/login', credentials)
+export const login = credentials => api.post('/users/login', credentials)
