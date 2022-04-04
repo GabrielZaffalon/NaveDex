@@ -2,11 +2,12 @@ import React from 'react'
 import { string, oneOf, bool, shape } from 'prop-types'
 import { space, layout, color, border, flexbox, variant, borderColor } from 'styled-system'
 import styled from 'styled-components/native'
+import { ActivityIndicator } from 'react-native'
 
 import { Text } from '../Text'
 import { Icons } from '../Icons'
 import { Row } from '../Row'
-import { LottieLoader as Loader } from '../Loader'
+// import { LottieLoader as Loader } from '../Loader'
 import theme from '../../theme'
 
 const PRIMARY = 'primary'
@@ -35,7 +36,7 @@ const ButtonComponent = ({
     {...props}
   >
     {isLoading ? (
-      <Loader color='white' size='small' />
+      <ActivityIndicator color='white' size='small' />
     ) : (
       <Row alignItems='center' justifyContent='center'>
         {!!icon.name && (
