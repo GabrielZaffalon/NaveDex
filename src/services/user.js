@@ -1,5 +1,5 @@
 import { api } from 'src/providers'
-import { getToken } from 'src/utils/auth'
+import { getToken } from 'src/utils'
 
 export const getMe = async () => {
   const token = await getToken()

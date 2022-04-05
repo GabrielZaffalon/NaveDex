@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, View } from 'react-native'
+import { ActivityIndicator, StatusBar, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ThemeProvider } from 'styled-components'
@@ -16,8 +16,15 @@ if (__DEV__) {
 const queryClient = new QueryClient()
 
 const App = () => {
-  const { user } = useUser()
-  // console.tron.log({ user })
+  const { user, isFetchingUser } = useUser()
+
+  if (isFetchingUser) {
+    return (
+      <Column flex={1} alignItems='center' justifyContent='center'>
+        <ActivityIndicator color='black' />
+      </Column>
+    )
+  }
   return (
     <ThemeProvider theme={theme}>
       <StatusBar barStyle='dark-content' />
