@@ -2,11 +2,26 @@ import React, { useState } from 'react'
 import { View, ScrollView } from 'react-native'
 
 import { Button, Column, Header, Input, Text, Modal } from 'src/components'
+import { createNaver } from 'src/services'
 
 const CreateNaver = ({ route, navigation }) => {
   const [editNaver, setEditNaver] = useState(route.params?.naver)
 
   const [message, setMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const sendNaverToApi = async () => {
+    try {
+      setIsLoading(true)
+      await createNaver(editNaver)
+    } catch (error) {
+      console.tron.log({ error })
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   console.tron.log({ editNaver })
 
@@ -61,8 +76,9 @@ const CreateNaver = ({ route, navigation }) => {
             height={42}
             my='8px'
             onPress={() => {
-              setMessage(true)
+              sendNaverToApi()
             }}
+            isLoading={isLoading}
           />
         </Column>
       </ScrollView>
@@ -72,6 +88,15 @@ const CreateNaver = ({ route, navigation }) => {
         handleClose={() => setMessage(false)}
         title={`Naver ${!!route.params?.naver?.name ? 'editado' : 'criado'}`}
         description={` Naver ${!!route.params?.naver?.name ? 'editado' : 'criado'} com sucesso!`}
+      />
+
+      <Modal
+        visible={errorMessage}
+        handleClose={() => setErrorMessage(false)}
+        title={`Houve um erro!`}
+        description={` Houve um erro e seu naver não foi ${
+          !!route.params?.naver?.name ? 'editado' : 'criado'
+        }!`}
       />
     </View>
   )
