@@ -8,6 +8,8 @@ const CreateNaver = ({ route, navigation }) => {
 
   const [message, setMessage] = useState(false)
 
+  console.tron.log({ editNaver })
+
   return (
     <View alignItems='center' justifyContent='center'>
       <Header backHeader />
