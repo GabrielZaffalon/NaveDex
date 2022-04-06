@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, ScrollView, Dimensions } from 'react-native'
 
 import { Text, Naver, Row, Modal, Header, Button } from 'src/components'
+import { getNaver } from 'src/services'
 
 const NAVERS = [
   {
@@ -51,6 +52,8 @@ const Home = ({ navigation }) => {
 
   const [isConfirmingDeletion, setIsConfirmingDeletion] = useState(false)
   const [hasSuccessfullyDeleted, setHasSuccessfullyDeleted] = useState(false)
+
+  console.tron.log(getNaver)
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
