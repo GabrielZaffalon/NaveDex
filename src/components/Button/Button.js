@@ -7,7 +7,6 @@ import { ActivityIndicator } from 'react-native'
 import { Text } from '../Text'
 import { Icons } from '../Icons'
 import { Row } from '../Row'
-// import { LottieLoader as Loader } from '../Loader'
 import theme from '../../theme'
 
 const PRIMARY = 'primary'

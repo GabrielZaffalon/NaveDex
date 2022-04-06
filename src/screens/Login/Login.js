@@ -15,7 +15,7 @@ const Login = () => {
       setIsLoading(true)
       await loginUser(credentials)
     } catch (error) {
-      console.log(error)
+      console.tron.log(error)
     } finally {
       setIsLoading(false)
     }

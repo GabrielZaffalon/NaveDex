@@ -17,7 +17,6 @@ const UserProvider = props => {
       if (token) {
         setUser(true)
       }
-      console.tron.log(token)
     } catch (error) {
       console.tron.log(error)
     } finally {
@@ -32,7 +31,6 @@ const UserProvider = props => {
   const loginUser = async credentials => {
     const response = await login(credentials)
     await setToken(response.token)
-    console.tron.log({ response })
     setUser(response)
   }
 
