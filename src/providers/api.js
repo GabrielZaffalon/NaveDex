@@ -1,27 +1,28 @@
 import axios from 'axios'
-import Config from 'react-native-config'
+import { Alert } from 'react-native'
+import React from 'react'
 
-import { getToken } from 'src/utils/auth'
+import { getToken } from 'src/utils'
 
-const api = axios.create({
-  baseURL: Config.API_URL
+const provider = axios.create({
+  baseURL: 'https://navedex-api.herokuapp.com/v1'
 })
 
-api.interceptors.request.use(async ({ headers, ...config }) => {
+provider.interceptors.request.use(async ({ headers, ...config }) => {
   const token = await getToken()
 
   return {
     ...config,
     headers: {
       ...headers,
-      Authorization: `Bearer ${token}`
+      Authorization: token ? `Bearer ${token}` : ''
     }
   }
 })
 
-api.interceptors.response.use(
+provider.interceptors.response.use(
   response => response?.data,
   err => Promise.reject(err?.response?.data)
 )
 
-export default api
+export default provider

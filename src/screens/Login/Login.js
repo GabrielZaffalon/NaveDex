@@ -4,10 +4,22 @@ import { Column, Input, Button, Row, Icons } from 'src/components'
 import { useUser } from 'src/context'
 
 const Login = () => {
-  const { login } = useUser()
+  const { loginUser } = useUser()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const login = async credentials => {
+    try {
+      setIsLoading(true)
+      await loginUser(credentials)
+    } catch (error) {
+      console.tron.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <Column flex={1} justifyContent='center' justifyContent='space-evenly' p={40}>
@@ -25,10 +37,11 @@ const Login = () => {
         />
         <Button
           text='Entrar'
-          onPress={() => login({ username, password })}
+          onPress={() => login({ email: username, password })}
           variant='primary'
           height={42}
           my='8px'
+          isLoading={isLoading}
         />
       </Column>
     </Column>

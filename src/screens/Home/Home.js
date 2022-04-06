@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, ScrollView, Dimensions } from 'react-native'
 
 import { Text, Naver, Row, Modal, Header, Button } from 'src/components'
+import { showNavers } from 'src/services'
 
 const NAVERS = [
   {
@@ -52,11 +53,26 @@ const Home = ({ navigation }) => {
   const [isConfirmingDeletion, setIsConfirmingDeletion] = useState(false)
   const [hasSuccessfullyDeleted, setHasSuccessfullyDeleted] = useState(false)
 
+  const [navers, setNavers] = useState([])
+
+  const fetchNavers = async () => {
+    try {
+      const response = await showNavers()
+      setNavers(response)
+    } catch (error) {
+      console.tron.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchNavers()
+  }, [])
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1 }}>
       <Header navigation={navigation} />
 
-      <Row flex={1} alignItems='center' justifyContent='space-between' width='100%' p={16}>
+      <Row alignItems='center' justifyContent='space-between' width='100%' p={16}>
         <Text fontFamily='MontserratSemiBold' fontSize={22} color='black'>
           Navers
         </Text>
@@ -70,9 +86,13 @@ const Home = ({ navigation }) => {
         />
       </Row>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Row flexWrap='wrap' px='16px' justifyContent='space-between'>
-          {NAVERS.map((naver, index) => (
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ width: '100%' }}
+      >
+        <Row flexWrap='wrap' px={16} justifyContent='space-between'>
+          {navers.map((naver, index) => (
             <Naver
               key={`${naver.title}-${index}`}
               naver={naver}
