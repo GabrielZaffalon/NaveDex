@@ -16,8 +16,10 @@ const CreateNaver = ({ route, navigation }) => {
     try {
       setIsLoading(true)
       await createNaver(editNaver)
+      setMessage(true)
     } catch (error) {
       console.tron.log({ error })
+      setErrorMessage(true)
     } finally {
       setIsLoading(false)
     }
@@ -94,7 +96,7 @@ const CreateNaver = ({ route, navigation }) => {
         visible={errorMessage}
         handleClose={() => setErrorMessage(false)}
         title={`Houve um erro!`}
-        description={` Houve um erro e seu naver não foi ${
+        description={`Houve um erro e seu naver não foi ${
           !!route.params?.naver?.name ? 'editado' : 'criado'
         }!`}
       />

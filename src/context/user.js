@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { login as loginService } from 'src/services/user'
-import { setToken, clearToken } from 'src/utils/auth'
+import { login } from 'src/services'
+import { setToken, clearToken, getToken } from 'src/utils'
 
 const UserContext = React.createContext()
 
