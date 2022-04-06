@@ -61,15 +61,12 @@ const Home = ({ navigation }) => {
       setNavers(response)
     } catch (error) {
       console.tron.log(error)
-    } finally {
     }
   }
 
   useEffect(() => {
     fetchNavers()
   }, [])
-
-  // console.tron.log({ showNavers })
 
   return (
     <View style={{ flex: 1 }}>

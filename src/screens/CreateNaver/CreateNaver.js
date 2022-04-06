@@ -25,8 +25,6 @@ const CreateNaver = ({ route, navigation }) => {
     }
   }
 
-  console.tron.log({ editNaver })
-
   return (
     <View alignItems='center' justifyContent='center'>
       <Header backHeader />
