@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { View, ScrollView, TouchableOpacity, Dimensions, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
 
 import { Text, Row, Modal, Header, Button, Column } from 'src/components'
+import { deleteNavers } from 'src/services'
 
 const NaverProfile = ({ route }) => {
   const [isConfirmingDeletion, setIsConfirmingDeletion] = useState(false)
   const [hasSuccessfullyDeleted, setHasSuccessfullyDeleted] = useState(false)
+  const [failToDeleteNaver, setFailToDeleteNaver] = useState(false)
 
   const { naver } = route.params
 
@@ -14,6 +17,22 @@ const NaverProfile = ({ route }) => {
 
   const width = Dimensions.get('screen').width
   const height = width * 0.8
+
+  const deletingNaver = async () => {
+    try {
+      await deleteNavers(naver.id)
+
+      setHasSuccessfullyDeleted(true)
+
+      navigation.navigate('Home')
+    } catch (error) {
+      setFailToDeleteNaver(true)
+
+      console.tron.log(error)
+    } finally {
+      setIsConfirmingDeletion(false)
+    }
+  }
 
   return (
     <Column style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -80,8 +99,7 @@ const NaverProfile = ({ route }) => {
           btn1: { onPress: () => setIsConfirmingDeletion(false), title: 'Cancelar' },
           btn2: {
             onPress: () => {
-              setIsConfirmingDeletion(false)
-              setHasSuccessfullyDeleted(true)
+              deletingNaver()
             },
             title: 'Excluir'
           }
@@ -93,6 +111,13 @@ const NaverProfile = ({ route }) => {
         handleClose={() => setHasSuccessfullyDeleted(false)}
         title='Naver excluído'
         description='Naver excluído com sucesso'
+      />
+
+      <Modal
+        visible={failToDeleteNaver}
+        handleClose={() => setFailToDeleteNaver(false)}
+        title='Houve um erro!'
+        description='Houve um erro e seu Naver não foi excluído!'
       />
     </Column>
   )
