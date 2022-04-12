@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { View, ScrollView, Dimensions } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
+import { ActivityIndicator } from 'react-native'
 
-import { Text, Naver, Row, Modal, Header, Button } from 'src/components'
-import { showNavers } from 'src/services'
+import { Text, Naver, Row, Modal, Header, Button, Column } from 'src/components'
+import { showNavers, deleteNavers } from 'src/services'
 
 const Home = ({ navigation }) => {
   const screenWidth = Dimensions.get('screen').width
@@ -12,6 +13,11 @@ const Home = ({ navigation }) => {
 
   const [isConfirmingDeletion, setIsConfirmingDeletion] = useState(false)
   const [hasSuccessfullyDeleted, setHasSuccessfullyDeleted] = useState(false)
+  const [failToDeleteNaver, setFailToDeleteNaver] = useState(false)
+
+  const [toDeleteNaver, setToDeleteNaver] = useState(null)
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const [navers, setNavers] = useState([])
 
@@ -21,6 +27,28 @@ const Home = ({ navigation }) => {
       setNavers(response)
     } catch (error) {
       console.tron.log(error)
+    }
+  }
+
+  const deletingNaver = async () => {
+    if (!!toDeleteNaver) {
+      try {
+        await deleteNavers(toDeleteNaver)
+
+        setNavers(previousState => previousState.filter(naver => naver.id !== toDeleteNaver))
+
+        // !!await fetchNavers()
+        // !!setNavers(navers.filter(naver => naver.id !== toDeleteNaver))
+
+        setHasSuccessfullyDeleted(true)
+      } catch (error) {
+        setFailToDeleteNaver(true)
+
+        console.tron.log(error)
+      } finally {
+        setIsConfirmingDeletion(false)
+        setToDeleteNaver(null)
+      }
     }
   }
 
@@ -46,28 +74,35 @@ const Home = ({ navigation }) => {
         />
       </Row>
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{ flex: 1 }}
-        contentContainerStyle={{ width: '100%' }}
-      >
-        <Row flexWrap='wrap' px={16} justifyContent='space-between'>
-          {navers.map((naver, index) => (
-            <Naver
-              key={`${naver.title}-${index}`}
-              naver={naver}
-              imageSize={(screenWidth - 48) / 2}
-              my={13}
-              onDelete={() => {
-                setIsConfirmingDeletion(true)
-              }}
-              onEdit={() => {
-                navigation.navigate('CreateNaver', { naver })
-              }}
-            />
-          ))}
-        </Row>
-      </ScrollView>
+      {isLoading ? (
+        <Column justifyContent='center' flex={1}>
+          <ActivityIndicator color='black' size='small' />
+        </Column>
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1 }}
+          contentContainerStyle={{ width: '100%' }}
+        >
+          <Row flexWrap='wrap' px={16} justifyContent='space-between'>
+            {navers.map((naver, index) => (
+              <Naver
+                key={`${naver.title}-${index}`}
+                naver={naver}
+                imageSize={(screenWidth - 48) / 2}
+                my={13}
+                onDelete={() => {
+                  setIsConfirmingDeletion(true)
+                  setToDeleteNaver(naver.id)
+                }}
+                onEdit={() => {
+                  navigation.navigate('CreateNaver', { naver })
+                }}
+              />
+            ))}
+          </Row>
+        </ScrollView>
+      )}
 
       <Modal
         visible={isConfirmingDeletion}
@@ -78,8 +113,7 @@ const Home = ({ navigation }) => {
           btn1: { onPress: () => setIsConfirmingDeletion(false), title: 'Cancelar' },
           btn2: {
             onPress: () => {
-              setIsConfirmingDeletion(false)
-              setHasSuccessfullyDeleted(true)
+              deletingNaver()
             },
             title: 'Excluir'
           }
@@ -91,6 +125,13 @@ const Home = ({ navigation }) => {
         handleClose={() => setHasSuccessfullyDeleted(false)}
         title='Naver excluído'
         description='Naver excluído com sucesso'
+      />
+
+      <Modal
+        visible={failToDeleteNaver}
+        handleClose={() => setFailToDeleteNaver(false)}
+        title='Houve um erro!'
+        description='Houve um erro e seu Naver não foi excluído!'
       />
     </View>
   )

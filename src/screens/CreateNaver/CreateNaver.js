@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { View, ScrollView } from 'react-native'
 
 import { Button, Column, Header, Input, Text, Modal } from 'src/components'
-import { createNaver } from 'src/services'
+import { createNaver, editNaver } from 'src/services'
 import { formatDate } from 'src/utils'
 
+
 const CreateNaver = ({ route, navigation }) => {
-  const [editNaver, setEditNaver] = useState(route.params?.naver)
+  const [naver, setNaver] = useState(route.params?.naver)
 
   const [message, setMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
@@ -16,7 +17,19 @@ const CreateNaver = ({ route, navigation }) => {
   const sendNaverToApi = async () => {
     try {
       setIsLoading(true)
-      await createNaver(editNaver)
+
+      const formatNaverToApi = {
+        name: naver.name,
+        admission_date: naver.admission_date,
+        job_role: naver.job_role,
+        project: naver.project,
+        birthdate: naver.birthdate,
+        url: naver.url
+      }
+
+      await (!!route.params?.naver?.name
+        ? editNaver(formatNaverToApi, naver.id)
+        : createNaver(naver))
       setMessage(true)
     } catch (error) {
       console.tron.log({ error })
@@ -37,14 +50,14 @@ const CreateNaver = ({ route, navigation }) => {
           <Input
             label='Nome'
             placeholder='Nome'
-            value={editNaver?.name}
-            onChange={text => setEditNaver({ ...editNaver, name: text })}
+            value={naver?.name}
+            onChange={text => setNaver({ ...naver, name: text })}
           />
           <Input
             label='Cargo'
             placeholder='Cargo'
-            value={editNaver?.job_role}
-            onChange={text => setEditNaver({ ...editNaver, job_role: text })}
+            value={naver?.job_role}
+            onChange={text => setNaver({ ...naver, job_role: text })}
           />
           <Input
             label='Idade'
@@ -61,14 +74,14 @@ const CreateNaver = ({ route, navigation }) => {
           <Input
             label='Projetos que participou'
             placeholder='Projetos que participou'
-            value={editNaver?.project}
-            onChange={text => setEditNaver({ ...editNaver, project: text })}
+            value={naver?.project}
+            onChange={text => setNaver({ ...naver, project: text })}
           />
           <Input
             label='URL da foto do naver'
             placeholder='URL da foto do naver'
-            value={editNaver?.url}
-            onChange={text => setEditNaver({ ...editNaver, url: text })}
+            value={naver?.url}
+            onChange={text => setNaver({ ...naver, url: text })}
           />
 
           <Button
@@ -89,6 +102,7 @@ const CreateNaver = ({ route, navigation }) => {
         handleClose={() => setMessage(false)}
         title={`Naver ${!!route.params?.naver?.name ? 'editado' : 'criado'}`}
         description={` Naver ${!!route.params?.naver?.name ? 'editado' : 'criado'} com sucesso!`}
+        closeAndLeaveScreen='Home'
       />
 
       <Modal
