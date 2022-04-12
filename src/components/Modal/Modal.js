@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { Text } from '../Text'
 import { Icons } from '../Icons'
@@ -7,7 +8,17 @@ import { Row } from '../Row'
 import { Column } from '../Column'
 import { Button } from '../Button'
 
-const ModalComponent = ({ visible, handleClose, buttons = {}, title, description, ...props }) => {
+const ModalComponent = ({
+  visible,
+  handleClose,
+  buttons = {},
+  title,
+  description,
+  closeAndLeaveScreen = '',
+  ...props
+}) => {
+  const navigation = useNavigation()
+
   return (
     <Modal visible={visible} transparent animationType='fade'>
       <TouchableWithoutFeedback onPress={handleClose}>
@@ -24,7 +35,14 @@ const ModalComponent = ({ visible, handleClose, buttons = {}, title, description
                 <Text color='black' fontFamily='MontserratSemiBold' fontSize='22px'>
                   {title}
                 </Text>
-                <TouchableOpacity onPress={handleClose} style={{ alignSelf: 'flex-start' }}>
+                <TouchableOpacity
+                  onPress={
+                    !!closeAndLeaveScreen
+                      ? () => navigation.navigate(closeAndLeaveScreen)
+                      : handleClose
+                  }
+                  style={{ alignSelf: 'flex-start' }}
+                >
                   <Icons icon='clear' />
                 </TouchableOpacity>
               </Row>
