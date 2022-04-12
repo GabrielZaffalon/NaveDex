@@ -24,7 +24,7 @@ const NaverProfile = ({ route }) => {
 
       setHasSuccessfullyDeleted(true)
 
-      navigation.navigate('Home')
+      navigation.goBack()
     } catch (error) {
       setFailToDeleteNaver(true)
 
