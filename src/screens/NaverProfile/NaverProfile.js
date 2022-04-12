@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import { View, ScrollView, TouchableOpacity, Dimensions, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { formatDistanceStrict } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
-
 import { Text, Row, Modal, Header, Button, Column } from 'src/components'
+import { formatDistanceStrictDate } from 'src/utils'
 
 const NaverProfile = ({ route }) => {
   const [isConfirmingDeletion, setIsConfirmingDeletion] = useState(false)
@@ -35,17 +33,14 @@ const NaverProfile = ({ route }) => {
             Idade
           </Text>
           <Text fontFamily='MontserratLight' fontSize={16} color='black' marginTop='4px'>
-            {formatDistanceStrict(new Date(naver.birthdate), new Date(), {
-              addSuffix: false,
-              locale: ptBR
-            })}
+            {formatDistanceStrictDate(naver.birthdate)}
           </Text>
 
           <Text fontFamily='MontserratSemiBold' fontSize={16} color='black' marginTop={24}>
             Tempo de empresa
           </Text>
           <Text fontFamily='MontserratLight' fontSize={16} color='black' marginTop='4px'>
-            {formatDistanceStrict(new Date(naver.admission_date), new Date(), { locale: ptBR })}
+            {formatDistanceStrictDate(naver.admission_date)}
           </Text>
 
           <Text fontFamily='MontserratSemiBold' fontSize={16} color='black' marginTop={24}>
