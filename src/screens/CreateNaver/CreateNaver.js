@@ -2,11 +2,19 @@ import React, { useState } from 'react'
 import { View, ScrollView } from 'react-native'
 
 import { Button, Column, Header, Input, Text, Modal } from 'src/components'
-import { createNaver } from 'src/services'
-import { editNaver } from 'src/services'
+import { createNaver, editNaver } from 'src/services'
+import { formatDate } from 'src/utils'
 
 const CreateNaver = ({ route, navigation }) => {
-  const [naver, setNaver] = useState(route.params?.naver)
+  const [naver, setNaver] = useState(
+    route.params?.naver
+      ? {
+          ...route.params.naver,
+          admission_date: formatDate(route.params.naver.admission_date),
+          birthdate: formatDate(route.params.naver.birthdate)
+        }
+      : {}
+  )
 
   const [message, setMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
@@ -60,14 +68,22 @@ const CreateNaver = ({ route, navigation }) => {
           />
           <Input
             label='Idade'
-            placeholder='Idade'
+            placeholder='Data de nascimento'
             value={naver?.birthdate}
+            type={'datetime'}
+            options={{
+              format: 'DD/MM/YYYY'
+            }}
             onChange={text => setNaver({ ...naver, birthdate: text })}
           />
           <Input
             label='Tempo de empresa'
-            placeholder='Tempo de empresa'
-            value={naver?.admission_date}
+            placeholder='Data da admissão'
+            value={naver.admission_date}
+            type={'datetime'}
+            options={{
+              format: 'DD/MM/YYYY'
+            }}
             onChange={text => setNaver({ ...naver, admission_date: text })}
           />
           <Input

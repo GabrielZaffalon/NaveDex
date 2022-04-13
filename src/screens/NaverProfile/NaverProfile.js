@@ -5,6 +5,7 @@ import { useIsFocused } from '@react-navigation/native'
 
 import { Text, Row, Modal, Header, Button, Column } from 'src/components'
 import { deleteNavers } from 'src/services'
+import { formatDistanceStrictDate } from 'src/utils'
 
 const NaverProfile = ({ route }) => {
   const [isConfirmingDeletion, setIsConfirmingDeletion] = useState(false)
@@ -51,14 +52,14 @@ const NaverProfile = ({ route }) => {
             Idade
           </Text>
           <Text fontFamily='MontserratLight' fontSize={16} color='black' marginTop='4px'>
-            {naver.birthdate}
+            {formatDistanceStrictDate(naver.birthdate)}
           </Text>
 
           <Text fontFamily='MontserratSemiBold' fontSize={16} color='black' marginTop={24}>
             Tempo de empresa
           </Text>
           <Text fontFamily='MontserratLight' fontSize={16} color='black' marginTop='4px'>
-            {naver.admission_date}
+            {formatDistanceStrictDate(naver.admission_date)}
           </Text>
 
           <Text fontFamily='MontserratSemiBold' fontSize={16} color='black' marginTop={24}>

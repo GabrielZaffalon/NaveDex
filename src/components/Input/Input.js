@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Platform, TouchableOpacity } from 'react-native'
+import { TextInputMask } from 'react-native-masked-text'
+
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -21,9 +23,27 @@ const Input = ({
   value,
   autoCapitalize,
   secureTextEntry,
+  options,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false)
+
+  const inputProps = {
+    placeholder,
+    fontSize: 16,
+    secureTextEntry: type === 'password',
+    type,
+    editable: !disabled,
+    onChangeText: text => {
+      onChange(text)
+    },
+    value,
+    multiline: textArea,
+    keyboardType,
+    maxLength,
+    autoCapitalize,
+    secureTextEntry
+  }
 
   return (
     <Column {...props}>
@@ -40,21 +60,7 @@ const Input = ({
         </Text>
       )}
       <Container error={!!error} isFocused={isFocused} editable={!disabled} multiline={textArea}>
-        <InputComponent
-          placeholder={placeholder}
-          fontSize={16}
-          secureTextEntry={type === 'password'}
-          editable={!disabled}
-          onChangeText={text => {
-            onChange(text)
-          }}
-          value={value}
-          multiline={textArea}
-          keyboardType={keyboardType}
-          maxLength={maxLength}
-          autoCapitalize={autoCapitalize}
-          secureTextEntry={secureTextEntry}
-        />
+        {options ? <StyledTextInputMask {...inputProps} /> : <InputComponent {...inputProps} />}
         {!!suffix && (
           <Text color={disabled ? 'gray.n500' : 'gray.n800'} lineHeight='16px' marginRight={10}>
             {suffix}
@@ -95,6 +101,14 @@ const InputComponent = styled.TextInput.attrs(({ multiline, ...props }) => ({
   fontFamily: 'MontserratMedium',
   ...props
 }))`
+  flex: 1;
+  height: 100%;
+  padding: 8px 10px;
+  font-size: 16px;
+  font-weight: 500;
+`
+
+const StyledTextInputMask = styled(TextInputMask)`
   flex: 1;
   height: 100%;
   padding: 8px 10px;
