@@ -6,7 +6,15 @@ import { createNaver, editNaver } from 'src/services'
 import { formatDate } from 'src/utils'
 
 const CreateNaver = ({ route, navigation }) => {
-  const [naver, setNaver] = useState(route.params?.naver || {})
+  const [naver, setNaver] = useState(
+    route.params?.naver
+      ? {
+          ...route.params.naver,
+          admission_date: formatDate(route.params.naver.admission_date),
+          birthdate: formatDate(route.params.naver.birthdate)
+        }
+      : {}
+  )
 
   const [message, setMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
@@ -61,13 +69,21 @@ const CreateNaver = ({ route, navigation }) => {
           <Input
             label='Idade'
             placeholder='Data de nascimento'
-            value={naver?.birthdate ? formatDate(naver?.birthdate) : naver?.birthdate}
+            value={naver?.birthdate}
+            type={'datetime'}
+            options={{
+              format: 'DD/MM/YYYY'
+            }}
             onChange={text => setNaver({ ...naver, birthdate: text })}
           />
           <Input
             label='Tempo de empresa'
             placeholder='Data da admissão'
-            value={naver.admission_date ? formatDate(naver?.admission_date) : naver?.admission_date}
+            value={naver.admission_date}
+            type={'datetime'}
+            options={{
+              format: 'DD/MM/YYYY'
+            }}
             onChange={text => setNaver({ ...naver, admission_date: text })}
           />
           <Input
