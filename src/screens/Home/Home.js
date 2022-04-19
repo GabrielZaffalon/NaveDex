@@ -79,16 +79,16 @@ const Home = ({ navigation }) => {
           <ActivityIndicator color='black' size='small' />
         </Column>
       ) : (
-        <View style={{ flex: 1 }} contentContainerStyle={{ width: '100%' }}>
+        <View style={{ flex: 1, width: '100%' }}>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={navers}
             numColumns={2}
             contentContainerStyle={{ paddingHorizontal: 10, justifyContent: 'space-between' }}
-            renderItem={({ item, index }) => {
+            data={navers}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => {
               return (
                 <Naver
-                  key={`${item.title}-${index}`}
                   naver={item}
                   imageSize={(screenWidth - 48) / 2}
                   my={13}
