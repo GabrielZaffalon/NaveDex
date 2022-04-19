@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, ScrollView, Dimensions } from 'react-native'
+import { View, ScrollView, Dimensions, FlatList } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import { ActivityIndicator } from 'react-native'
 
@@ -79,29 +79,32 @@ const Home = ({ navigation }) => {
           <ActivityIndicator color='black' size='small' />
         </Column>
       ) : (
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{ flex: 1 }}
-          contentContainerStyle={{ width: '100%' }}
-        >
-          <Row flexWrap='wrap' px={16} justifyContent='space-between'>
-            {navers.map((naver, index) => (
-              <Naver
-                key={`${naver.title}-${index}`}
-                naver={naver}
-                imageSize={(screenWidth - 48) / 2}
-                my={13}
-                onDelete={() => {
-                  setIsConfirmingDeletion(true)
-                  setToDeleteNaver(naver.id)
-                }}
-                onEdit={() => {
-                  navigation.navigate('CreateNaver', { naver })
-                }}
-              />
-            ))}
-          </Row>
-        </ScrollView>
+        <View style={{ flex: 1, width: '100%' }}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            contentContainerStyle={{ paddingHorizontal: 10, justifyContent: 'space-between' }}
+            data={navers}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => {
+              return (
+                <Naver
+                  naver={item}
+                  imageSize={(screenWidth - 48) / 2}
+                  my={13}
+                  mx='8px'
+                  onDelete={() => {
+                    setIsConfirmingDeletion(true)
+                    setToDeleteNaver(item.id)
+                  }}
+                  onEdit={() => {
+                    navigation.navigate('CreateNaver', { naver: item })
+                  }}
+                />
+              )
+            }}
+          />
+        </View>
       )}
 
       <Modal
