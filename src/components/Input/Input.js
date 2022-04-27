@@ -109,6 +109,8 @@ const InputComponent = styled.TextInput.attrs(({ multiline, ...props }) => ({
 `
 
 const StyledTextInputMask = styled(TextInputMask)`
+  placeholdertextcolor: ${theme.colors.gray};
+  color: ${theme.colors.black};
   flex: 1;
   height: 100%;
   padding: 8px 10px;
